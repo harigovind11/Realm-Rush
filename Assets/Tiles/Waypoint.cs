@@ -5,13 +5,26 @@ using UnityEngine;
 
 public class Waypoint : MonoBehaviour
 {
-    [SerializeField] private bool isPlaceable;
+    [SerializeField] Tower towerPrefab;
+    [SerializeField] bool isPlaceable;
+
+    public bool IsPlaceable //Property
+    {
+        get { return isPlaceable; }
+    }
+
+    // public bool GetIsPlaceable() //Getter
+    // {
+    //     return isPlaceable;
+    // }
 
     void OnMouseDown()
     {
         if (isPlaceable)
         {
-            Debug.Log(transform.name);
+            bool isPlaced = towerPrefab.CreateTower(towerPrefab, transform.position);
+            // Instantiate(towerPrefab, transform.position, Quaternion.identity);
+            isPlaceable = !isPlaced; // To avoid placing in same spot
         }
     }
 }
